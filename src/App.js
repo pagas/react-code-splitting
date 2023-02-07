@@ -1,8 +1,12 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {lazy, Suspense} from "react";
+import {delay} from "./utils";
 
-const Home = lazy(() => import('./components/routes/Home'));
+const Home = lazy(async () => {
+    await delay()
+    return import('./components/routes/Home')
+});
 const About = lazy(() => import('./components/routes/About'));
 
 function App() {
