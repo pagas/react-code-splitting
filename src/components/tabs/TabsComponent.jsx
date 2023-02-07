@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, startTransition } from 'react';
 import Tabs from './Tabs';
 import Glimmer from './Glimmer';
 import {delay} from "../../utils";
@@ -16,8 +16,11 @@ function TabsComponent() {
     const [tab, setTab] = React.useState('photos');
 
     function handleTabSelect(tab) {
-        setTab(tab);
-    };
+        // change UI only after finish loading and doesn't block the old UI
+        startTransition(() => {
+            setTab(tab);
+        });
+    }
 
     return (
         <div className="tabs-container">
