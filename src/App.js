@@ -4,6 +4,7 @@ import OtherComponent from "./components/OtherComponent";
 import {lazy, Suspense} from "react";
 import {delay} from "./utils";
 import LazyComponentBoundary from "./components/LazyComponentBoundary";
+import TabsComponent from "./components/tabs/TabsComponent";
 
 /**
  * Example of dynamic import. This will automatically create
@@ -20,7 +21,6 @@ const OtherComponentLazy = lazy(async () => {
 
 const OtherComponentLazy2 = lazy(async () => {
     throw new Error("Lazy component load error!!");
-    return import("./components/OtherComponentLazy")
 });
 
 import("./subtraction").then(({subtract}) => {
@@ -49,6 +49,9 @@ function App() {
                 </Suspense>
             </LazyComponentBoundary>
 
+
+            <hr/>
+            <TabsComponent/>
         </div>
     );
 }
