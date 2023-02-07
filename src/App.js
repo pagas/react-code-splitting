@@ -2,6 +2,7 @@ import './App.css';
 import {add} from './addition.js';
 import OtherComponent from "./components/OtherComponent";
 import {lazy, Suspense} from "react";
+import {delay} from "./utils";
 
 /**
  * Example of dynamic import. This will automatically create
@@ -10,7 +11,10 @@ import {lazy, Suspense} from "react";
  * loaded and then clause is run after current module is run.
  */
 
-const OtherComponentLazy = lazy(() => import("./components/OtherComponentLazy"));
+const OtherComponentLazy = lazy(async () => {
+    await delay();
+    return import("./components/OtherComponentLazy")
+});
 import("./subtraction").then(({subtract}) => {
     console.log(subtract(16, 26)); // 4
 });
@@ -21,20 +25,7 @@ console.log(add(16, 26)); // 4
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-
+            <h1>Code Splitting</h1>
 
             <hr/>
             <OtherComponent/>
